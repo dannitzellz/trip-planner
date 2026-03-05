@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel Planner</title>
+</head>
+<body>
+  <header>
+    <h1>Travel Planner</h1>
+    <p>Register your destinations, choose transport and accommodation, and see your estimated costs!</p>
+  </header>
+
+  <main>
+    <!-- Form to register a new trip -->
+    <section id="trip-form-section">
+      <h2>Register a New Trip</h2>
+      <form id="trip-form">
+        <div>
+          <label for="destination">Destination:</label>
+          <select id="destination" name="destination" required>
+            <option value="">Select a destination</option>
+            <option value="Paris">Paris</option>
+            <option value="London">London</option>
+            <option value="New York">New York</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="date">Travel Date:</label>
+          <input type="date" id="date" name="date" required>
+        </div>
+
+        <div>
+          <label for="transport">Transport:</label>
+          <select id="transport" name="transport" required>
+            <option value="">Select a transport</option>
+            <option value="Plane">Plane</option>
+            <option value="Train">Train</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="accommodation">Accommodation:</label>
+          <select id="accommodation" name="accommodation" required>
+            <option value="">Select accommodation</option>
+            <option value="Hotel">Hotel</option>
+            <option value="Hostel">Hostel</option>
+            <option value="Airbnb">Airbnb</option>
+          </select>
+        </div>
+
+        <button type="submit">Register Trip</button>
+      </form>
+    </section>
+
+    <!-- Section to display registered trips -->
+    <section id="itinerary-section">
+      <h2>Your Registered Trips</h2>
+      <ul id="itinerary-list">
+        <!-- Trips will be dynamically added here -->
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Travel Planner</p>
+  </footer>
+
+  <script src="app.js" type="module"></script>
+</body>
+</html>

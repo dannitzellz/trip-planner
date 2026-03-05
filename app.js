@@ -28,6 +28,9 @@ function formatDate(dateStr) {
   return d.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
 }
 
+// Render persisted trips on page load
+renderItinerary(getTrips());
+
 tripForm.addEventListener('submit', (event) => {
   event.preventDefault();
 

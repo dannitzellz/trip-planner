@@ -4,67 +4,90 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Travel Planner</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
   <header>
-    <h1>Travel Planner</h1>
-    <p>Register your destinations, choose transport and accommodation, and see your estimated costs!</p>
+    <div class="header-inner">
+      <span class="header-eyebrow">Your Journey Starts Here</span>
+      <h1>Travel <em>Planner</em></h1>
+      <p>Register your destinations, pick your transport and stay — we'll handle the estimated costs.</p>
+    </div>
   </header>
 
   <main>
+
     <!-- Form to register a new trip -->
-    <section id="trip-form-section">
-      <h2>Register a New Trip</h2>
+    <section id="trip-form-section" class="card">
+      <div class="section-heading">
+        <div class="section-heading-icon section-heading-icon--orange">✈</div>
+        <h2>Register a New Trip</h2>
+      </div>
+
       <form id="trip-form">
-        <div>
-          <label for="destination">Destination:</label>
+        <div class="form-group">
+          <label for="destination">Destination</label>
           <select id="destination" name="destination" required>
             <option value="">Select a destination</option>
-            <option value="Paris">Paris</option>
-            <option value="London">London</option>
-            <option value="New York">New York</option>
+            <option value="Paris">🗼 Paris</option>
+            <option value="London">🎡 London</option>
+            <option value="New York">🗽 New York</option>
           </select>
         </div>
 
-        <div>
-          <label for="date">Travel Date:</label>
+        <div class="form-group">
+          <label for="date">Travel Date</label>
           <input type="date" id="date" name="date" required>
         </div>
 
-        <div>
-          <label for="transport">Transport:</label>
+        <div class="form-group">
+          <label for="transport">Transport</label>
           <select id="transport" name="transport" required>
-            <option value="">Select a transport</option>
-            <option value="Plane">Plane</option>
-            <option value="Train">Train</option>
+            <option value="">Select transport</option>
+            <option value="Plane">✈ Plane</option>
+            <option value="Train">🚄 Train</option>
           </select>
         </div>
 
-        <div>
-          <label for="accommodation">Accommodation:</label>
+        <div class="form-group">
+          <label for="accommodation">Accommodation</label>
           <select id="accommodation" name="accommodation" required>
             <option value="">Select accommodation</option>
-            <option value="Hotel">Hotel</option>
-            <option value="Hostel">Hostel</option>
-            <option value="Airbnb">Airbnb</option>
+            <option value="Hotel">🏨 Hotel</option>
+            <option value="Hostel">🛏 Hostel</option>
+            <option value="Airbnb">🏠 Airbnb</option>
           </select>
         </div>
 
-        <button type="submit">Register Trip</button>
+        <div class="form-group form-group--full">
+          <button type="submit" class="btn-primary">
+            <span class="btn-icon">＋</span>
+            Register Trip
+          </button>
+        </div>
       </form>
     </section>
 
-    <!-- Section to display registered trips -->
-    <section id="itinerary-section">
-      <h2>Your Registered Trips</h2>
+    <!-- Registered trips -->
+    <section id="itinerary-section" class="card">
+      <div class="section-heading">
+        <div class="section-heading-icon section-heading-icon--turquoise">🗺</div>
+        <h2>Your Registered Trips</h2>
+      </div>
+
       <ul id="itinerary-list">
-        <!-- Trips will be dynamically added here -->
+        <li class="itinerary-empty">
+          <div class="itinerary-empty-icon">✈</div>
+          <p>No trips yet — add your first destination above!</p>
+        </li>
       </ul>
     </section>
+
   </main>
 
   <footer>
-    <p>&copy; 2026 Travel Planner</p>
+    <p>&copy; 2026 Travel Planner &nbsp;·&nbsp; Plan more, worry less.</p>
   </footer>
 
   <script src="app.js" type="module"></script>

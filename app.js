@@ -1,47 +1,85 @@
 import { registerDestination, getTrips } from './trips.js';
 
-// Get form and itinerary elements
-const tripForm = document.getElementById('trip-form');
-const itineraryList = document.getElementById('itinerary-list');
+const tripForm       = document.getElementById('trip-form');
+const itineraryList  = document.getElementById('itinerary-list');
 
-// Listen for form submission
+// Destination emoji map
+const DEST_ICONS = {
+  'Paris':    '🗼',
+  'London':   '🎡',
+  'New York': '🗽',
+};
+
+const TRANSPORT_ICONS = {
+  'Plane': '✈',
+  'Train': '🚄',
+};
+
+const ACCOM_ICONS = {
+  'Hotel':  '🏨',
+  'Hostel': '🛏',
+  'Airbnb': '🏠',
+};
+
+// Format date nicely
+function formatDate(dateStr) {
+  if (!dateStr) return '—';
+  const d = new Date(dateStr + 'T00:00:00');
+  return d.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
+}
+
 tripForm.addEventListener('submit', (event) => {
-  event.preventDefault(); 
+  event.preventDefault();
 
-  // Get input values
-  const destination = document.getElementById('destination').value;
-  const date = document.getElementById('date').value;
-  const transport = document.getElementById('transport').value;
+  const destination   = document.getElementById('destination').value;
+  const date          = document.getElementById('date').value;
+  const transport     = document.getElementById('transport').value;
   const accommodation = document.getElementById('accommodation').value;
 
-  // Register the trip
   registerDestination(destination, date, transport, accommodation);
 
-  // Add accommodation info to the trip for display
   const trips = getTrips();
   trips[trips.length - 1].accommodation = accommodation;
 
-  // Update itinerary display
   renderItinerary(trips);
-
-  // Reset the form
   tripForm.reset();
 });
 
-// Function to render itinerary
 function renderItinerary(trips) {
-  // Clear current list
   itineraryList.innerHTML = '';
 
-  trips.forEach(trip => {
+  if (trips.length === 0) {
+    itineraryList.innerHTML = `
+      <li class="itinerary-empty">
+        <div class="itinerary-empty-icon">✈</div>
+        <p>No trips yet — add your first destination above!</p>
+      </li>`;
+    return;
+  }
+
+  trips.forEach((trip, i) => {
     const li = document.createElement('li');
+    li.classList.add('trip-card');
+    li.dataset.destination = trip.destination;
+    li.style.animationDelay = `${i * 0.06}s`;
+
+    const destIcon      = DEST_ICONS[trip.destination]    || '📍';
+    const transportIcon = TRANSPORT_ICONS[trip.transport] || '🚌';
+    const accomIcon     = ACCOM_ICONS[trip.accommodation] || '🏠';
+
     li.innerHTML = `
-      <strong>Destination:</strong> ${trip.destination} <br>
-      <strong>Date:</strong> ${trip.date} <br>
-      <strong>Transport:</strong> ${trip.transport} <br>
-      <strong>Accommodation:</strong> ${trip.accommodation} <br>
-      <strong>Cost:</strong> $${trip.cost}
+      <div class="trip-card-pin">${destIcon}</div>
+      <div class="trip-card-body">
+        <div class="trip-card-destination">${trip.destination}</div>
+        <div class="trip-card-meta">
+          <span class="trip-meta-item"><span class="meta-icon">📅</span>${formatDate(trip.date)}</span>
+          <span class="trip-meta-item"><span class="meta-icon">${transportIcon}</span>${trip.transport}</span>
+          <span class="trip-meta-item"><span class="meta-icon">${accomIcon}</span>${trip.accommodation}</span>
+        </div>
+      </div>
+      <div class="trip-card-cost">$${trip.cost}</div>
     `;
+
     itineraryList.appendChild(li);
   });
 }

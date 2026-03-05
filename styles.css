@@ -1,0 +1,510 @@
+/* ===============================
+   Google Fonts Import
+   =============================== */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,300&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+/* ===============================
+   Variables
+   =============================== */
+:root {
+  /* Brand palette */
+  --orange:     #FF6F3C;
+  --yellow:     #FFD166;
+  --turquoise:  #4EC5C1;
+  --coral:      #FF7E85;
+  --navy:       #264653;
+
+  /* Neutrals */
+  --white:      #FFFFFF;
+  --off-white:  #F8F6F2;
+  --cream:      #F0EDE6;
+  --gray-100:   #EDEBE6;
+  --gray-200:   #D6D3CC;
+  --gray-400:   #9A9690;
+  --gray-600:   #5C5A56;
+  --gray-800:   #2E2C2A;
+  --black:      #181715;
+
+  /* Semantic */
+  --bg:         var(--off-white);
+  --surface:    var(--white);
+  --text-main:  var(--gray-800);
+  --text-muted: var(--gray-400);
+  --border:     var(--gray-200);
+
+  /* Typography */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body:    'DM Sans', system-ui, sans-serif;
+
+  /* Spacing */
+  --radius-sm:  6px;
+  --radius-md:  12px;
+  --radius-lg:  20px;
+  --radius-xl:  32px;
+
+  /* Shadows — matte, no blur overkill */
+  --shadow-sm:  0 1px 4px rgba(38,70,83,0.07);
+  --shadow-md:  0 4px 16px rgba(38,70,83,0.10);
+  --shadow-lg:  0 8px 32px rgba(38,70,83,0.12);
+
+  /* Transitions */
+  --t-fast:  0.18s ease;
+  --t-med:   0.30s ease;
+}
+
+/* ===============================
+   Reset & Base
+   =============================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg);
+  color: var(--text-main);
+  line-height: 1.65;
+  font-size: 1rem;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===============================
+   Header
+   =============================== */
+header {
+  background-color: var(--navy);
+  color: var(--white);
+  padding: 3.5rem 2rem 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle geometric accent — no gradients */
+header::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  border: 40px solid rgba(78,197,193,0.12);
+  pointer-events: none;
+}
+
+header::after {
+  content: '';
+  position: absolute;
+  bottom: -40px;
+  left: 60px;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 24px solid rgba(255,111,60,0.10);
+  pointer-events: none;
+}
+
+.header-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.header-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--turquoise);
+  margin-bottom: 0.9rem;
+}
+
+.header-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 2px;
+  background-color: var(--turquoise);
+  border-radius: 2px;
+}
+
+header h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  font-weight: 500;
+  line-height: 1.15;
+  color: var(--white);
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.01em;
+}
+
+header h1 em {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--yellow);
+}
+
+header p {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.62);
+  max-width: 480px;
+  font-weight: 300;
+}
+
+/* ===============================
+   Main Layout
+   =============================== */
+main {
+  max-width: 900px;
+  margin: 2.5rem auto 4rem;
+  padding: 0 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ===============================
+   Card / Surface
+   =============================== */
+.card {
+  background-color: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 2.25rem 2.5rem;
+  border: 1px solid var(--gray-100);
+}
+
+/* ===============================
+   Section headings
+   =============================== */
+.section-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.75rem;
+}
+
+.section-heading-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.section-heading-icon--orange {
+  background-color: rgba(255,111,60,0.12);
+  color: var(--orange);
+}
+
+.section-heading-icon--turquoise {
+  background-color: rgba(78,197,193,0.12);
+  color: var(--turquoise);
+}
+
+.section-heading h2 {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 500;
+  color: var(--navy);
+  letter-spacing: -0.01em;
+}
+
+/* ===============================
+   Form
+   =============================== */
+#trip-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.form-group--full {
+  grid-column: 1 / -1;
+}
+
+label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gray-600);
+}
+
+input,
+select {
+  width: 100%;
+  padding: 0.7rem 0.95rem;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  background-color: var(--off-white);
+  font-family: var(--font-body);
+  font-size: 0.97rem;
+  color: var(--text-main);
+  transition: border-color var(--t-fast), box-shadow var(--t-fast), background-color var(--t-fast);
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239A9690' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.9rem center;
+  padding-right: 2.2rem;
+}
+
+input:hover,
+select:hover {
+  border-color: var(--gray-400);
+  background-color: var(--white);
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--turquoise);
+  background-color: var(--white);
+  box-shadow: 0 0 0 3px rgba(78,197,193,0.15);
+}
+
+input::placeholder {
+  color: var(--gray-400);
+}
+
+/* ===============================
+   Button
+   =============================== */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: var(--orange);
+  color: var(--white);
+  border: none;
+  padding: 0.85rem 2rem;
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 0.97rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background-color var(--t-fast), transform var(--t-fast), box-shadow var(--t-fast);
+  box-shadow: 0 2px 8px rgba(255,111,60,0.25);
+}
+
+.btn-primary:hover {
+  background-color: #F05A28;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(255,111,60,0.30);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(255,111,60,0.20);
+}
+
+.btn-primary .btn-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+/* ===============================
+   Itinerary — Trip Cards
+   =============================== */
+#itinerary-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.trip-card {
+  background-color: var(--off-white);
+  border: 1.5px solid var(--gray-100);
+  border-radius: var(--radius-md);
+  padding: 1.1rem 1.4rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0 1.25rem;
+  align-items: center;
+  transition: transform var(--t-fast), box-shadow var(--t-fast), border-color var(--t-fast);
+  animation: cardEnter 0.35s ease both;
+}
+
+@keyframes cardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.trip-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--turquoise);
+}
+
+/* Destination flag / icon pill */
+.trip-card-pin {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-sm);
+  background-color: rgba(38,70,83,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+/* Trip details */
+.trip-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.trip-card-destination {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--navy);
+  letter-spacing: -0.01em;
+}
+
+.trip-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  font-size: 0.82rem;
+  color: var(--gray-600);
+}
+
+.trip-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.trip-meta-item .meta-icon {
+  font-size: 0.9rem;
+  opacity: 0.75;
+}
+
+/* Cost badge */
+.trip-card-cost {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--navy);
+  background-color: rgba(78,197,193,0.12);
+  padding: 0.3rem 0.75rem;
+  border-radius: 20px;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+}
+
+/* Empty state */
+.itinerary-empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--gray-400);
+}
+
+.itinerary-empty-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+  opacity: 0.5;
+}
+
+.itinerary-empty p {
+  font-size: 0.95rem;
+}
+
+/* ===============================
+   Destination color accents
+   =============================== */
+.trip-card[data-destination="Paris"] .trip-card-pin       { background-color: rgba(255,209,102,0.20); }
+.trip-card[data-destination="London"] .trip-card-pin      { background-color: rgba(78,197,193,0.15); }
+.trip-card[data-destination="New York"] .trip-card-pin    { background-color: rgba(255,126,133,0.15); }
+
+/* ===============================
+   Footer
+   =============================== */
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: var(--gray-400);
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+  border-top: 1px solid var(--gray-100);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+footer a {
+  color: var(--turquoise);
+  text-decoration: none;
+  transition: color var(--t-fast);
+}
+
+footer a:hover {
+  color: var(--navy);
+}
+
+/* ===============================
+   Responsive
+   =============================== */
+@media (max-width: 640px) {
+  header {
+    padding: 2.5rem 1.25rem 2rem;
+  }
+
+  .card {
+    padding: 1.5rem 1.25rem;
+  }
+
+  #trip-form {
+    grid-template-columns: 1fr;
+  }
+
+  .form-group--full {
+    grid-column: 1;
+  }
+
+  .trip-card {
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .trip-card-cost {
+    grid-column: 2;
+    justify-self: start;
+    margin-top: 0.25rem;
+  }
+}

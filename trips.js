@@ -18,9 +18,16 @@ const ACCOMMODATION_COSTS = {
   Airbnb: 100
 };
 
+const STORAGE_KEY = 'travel_planner_trips';
+
 // Encapsulated travel manager
 const TravelManager = (() => {
-  const destinations = []; // private array
+  // Initialize from localStorage or empty array
+  const destinations = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '[]');
+
+  const persist = () => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(destinations));
+  };
 
   // Validate inputs
   const validateDestination = (destination) => {
@@ -70,10 +77,11 @@ const TravelManager = (() => {
     };
 
     destinations.push(newTrip);
+    persist();
   };
 
   // Public method: get trips (data only)
-  const getTrips = () => [...destinations]; // return a copy
+  const getTrips = () => [...destinations];
 
   // Public method: display trips
   const showItinerary = () => {
@@ -87,11 +95,18 @@ const TravelManager = (() => {
     });
   };
 
+  // Public method: clear all trips
+  const clearTrips = () => {
+    destinations.length = 0;
+    localStorage.removeItem(STORAGE_KEY);
+  };
+
   return {
     registerDestination,
     getTrips,
-    showItinerary
+    showItinerary,
+    clearTrips
   };
 })();
 
-export const { registerDestination, getTrips, showItinerary } = TravelManager;
+export const { registerDestination, getTrips, showItinerary, clearTrips } = TravelManager;

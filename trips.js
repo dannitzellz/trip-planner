@@ -11,6 +11,13 @@ const TRANSPORT_COSTS = {
   Train: 100
 };
 
+// Map of additional costs by accommodation
+const ACCOMMODATION_COSTS = {
+  Hotel: 150,
+  Hostel: 50,
+  Airbnb: 100
+};
+
 // Encapsulated travel manager
 const TravelManager = (() => {
   const destinations = []; // private array
@@ -28,6 +35,12 @@ const TravelManager = (() => {
     }
   };
 
+  const validateAccommodation = (accommodation) => {
+    if (!ACCOMMODATION_COSTS[accommodation]) {
+      throw new Error(`Invalid accommodation: ${accommodation}`);
+    }
+  };
+
   const validateDate = (date) => {
     if (isNaN(new Date(date))) {
       throw new Error(`Invalid date: ${date}`);
@@ -35,21 +48,25 @@ const TravelManager = (() => {
   };
 
   // Calculate cost using maps
-  const calculateCost = (destination, transport) => {
-    return DESTINATION_COSTS[destination] + TRANSPORT_COSTS[transport];
+  const calculateCost = (destination, transport, accommodation) => {
+    return DESTINATION_COSTS[destination] +
+           TRANSPORT_COSTS[transport] +
+           ACCOMMODATION_COSTS[accommodation];
   };
 
   // Public method: register a trip
-  const registerDestination = (destination, date, transport) => {
+  const registerDestination = (destination, date, transport, accommodation) => {
     validateDestination(destination);
     validateTransport(transport);
+    validateAccommodation(accommodation);
     validateDate(date);
 
     const newTrip = {
       destination,
       date,
       transport,
-      cost: calculateCost(destination, transport)
+      accommodation,
+      cost: calculateCost(destination, transport, accommodation)
     };
 
     destinations.push(newTrip);
@@ -64,6 +81,7 @@ const TravelManager = (() => {
       console.log(`Destination: ${trip.destination}`);
       console.log(`Date: ${trip.date}`);
       console.log(`Transport: ${trip.transport}`);
+      console.log(`Accommodation: ${trip.accommodation}`);
       console.log(`Cost: $${trip.cost}`);
       console.log("---------------------------");
     });
